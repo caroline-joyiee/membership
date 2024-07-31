@@ -18,5 +18,5 @@ const memberSchema = new Schema({
     timestamps: true,
 });
 
-userSchema.plugin(toJSON);
+memberSchema.plugin(toJSON);
 export const member_Model = model('Member', memberSchema);
