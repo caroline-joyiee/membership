@@ -7,11 +7,18 @@ import userRouter from "./routes/user_route.js";
 import cors from "cors";
 import { memberRouter } from "./routes/member_route.js";
 import { checkUserAuth } from "./middleware/auth.js";
+import expressOasGenerator from "@mickeymond/express-oas-generator";
 
 //Create an app
 
 const app = express();
 app.use(cors({ credentials: true, origin: "*" }))
+
+expressOasGenerator.handleResponses(app, {
+    alwaysServeDocs: true,
+    tags: ['user', 'member'],
+    mongooseModels: mongoose.modelNames(),
+})
 
 
 dbConnection();
@@ -21,7 +28,9 @@ dbConnection();
 app.use(express.json());
 
 
-
+app.use("/api/v1/health", (req, res) => {
+    res.json({ status: "UP"})
+})
 
 app.use(express.static('image'));
 app.use(userRouter);
