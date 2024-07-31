@@ -1,6 +1,6 @@
 import { model, Schema, Types } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
-import { userSchema } from "../schema/user_schema";
+import { userSchema } from "../schema/user_schema.js";
 
 const memberSchema = new Schema({
     firstname: { type: String },
@@ -13,6 +13,7 @@ const memberSchema = new Schema({
     emergencyContact: { type: String },
     image: { type: String },
     user: { type: Types.ObjectId, ref: "User", select: false }
+
 }, {
     timestamps: true,
 });
