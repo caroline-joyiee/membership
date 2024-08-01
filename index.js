@@ -46,7 +46,10 @@ app.use(session({
 }))
 
 // app.use(checkUserAuth);
-
+expressOasGenerator.handleRequests(app, {
+    alwaysServeDocs: true
+});
+app.use((req, res) => res.redirect('/api-docs/'));
 
 const port = process.env.PORT || 6345
 app.listen(port, () => {
